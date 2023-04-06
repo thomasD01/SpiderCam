@@ -1,0 +1,17 @@
+#Beispiel
+dim 70 100 30     # Dimension des Feldes der Form x,y,z
+start 10 80 10    # Startpunkt der Spidercam
+vmax 6            # Maximalgeschwindigkeit
+amax 2            # (Maxima)beschleunigung
+freq 2            # Frequenz zur Diskretisierung der Ausgabe
+0 50 50 30        # Zeilenweise Liste der anzufahrenden Punkt in der Form <Zeitpunk x y z>
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
+0 50 50 30
