@@ -4,9 +4,9 @@
 #include "io/io.hpp"
 #include "spielfeld/spielfeld.hpp"
 
-#define OUTPUT1 "../data/out1.csv"
-#define OUTPUT2 "../data/out2.csv"
-#define INPUT   "../data/input.dat"
+#define OUTPUT1 "./data/out1.csv"
+#define OUTPUT2 "./data/out2.csv"
+#define INPUT   "./data/input.dat"
 
 int main(int argc, char **argv)
 {
@@ -27,13 +27,29 @@ int main(int argc, char **argv)
 
     double* laengen = spielfeld.getLaengen();
 
-    std::cout << "laengen: ";
+    io.init(dim, laengen, start);
 
-    for(size_t i=0; i<4; ++i)
+    double t=0;
+    size_t id=0;
+
+    while(!(id == positionen.size() && spielfeld.done()))
     {
-      std::cout << laengen[i] << " ";
+      if(id<positionen.size()-1 && positionen[id+1][0] == t){
+        ++id;
+
+        int _pos[3] = {positionen[id][1],positionen[id][2],positionen[id][3]};
+
+        spielfeld.bewegeKamera(_pos);
+      }
+      else
+      {
+        t += 1.0/freq;
+        spielfeld.schritt(t);
+        io.schreibeDaten(t, spielfeld.getPos(), spielfeld.getLaengen());
+      }
     }
-    std::cout << std::endl;
+
+    io.writeBuffer();
   }
   catch(const std::exception& e)
   {

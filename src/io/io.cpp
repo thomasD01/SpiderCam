@@ -1,17 +1,16 @@
 #include "io.hpp"
 
 IO::IO(const char* d1, const char* d2)
-  :datei1_in(d1), datei1_out(d1), datei2_in(d2), datei2_out(d2)
-{}
+  :datei1(d1), datei2(d2), r1(), r2(), r3(), r4(), t(), x(), y(), z()
+{
+
+}
 
 IO::~IO()
 {
-  datei1_in.close();
-  datei1_out.close();
-  datei2_in.close();
-  datei2_out.close();
+  datei1.close();
+  datei2.close();
 }
-
 
 void getValuesFromString(std::string data, size_t count, int *out, size_t start=1)
 {
@@ -31,7 +30,56 @@ void getValuesFromString(std::string data, size_t count, int *out, size_t start=
     out[i] = atoi(data.substr(a, b-a+1).c_str());
   }
 }
+void IO::writeBuffer()
+{
+  for(auto _x:r1)
+  {
+    datei1 << _x;
+  }
+  datei1 << '\n';
 
+  for(auto _x:r2)
+  {
+    datei1 << _x;
+  }
+  datei1 << '\n';
+
+  for(auto _x:r3)
+  {
+    datei1 << _x;
+  }
+  datei1 << '\n';
+
+  for(auto _x:r4)
+  {
+    datei1 << _x;
+  }
+  datei1 << '\n';
+
+  for(auto _x:t)
+  {
+    datei2 << _x;
+  }
+  datei2 << '\n';
+
+  for(auto _x:x)
+  {
+    datei2 << _x;
+  }
+  datei2 << '\n';
+
+  for(auto _x:y)
+  {
+    datei2 << _x;
+  }
+  datei2 << '\n';
+
+  for(auto _x:z)
+  {
+    datei2 << _x;
+  }
+  datei2 << '\n';
+}
 
 void IO::leseDaten(const char* eingabe, int* dim, int* start, int* vmax, int* amax, int* freq, std::vector<int*>& positionen)
 {
@@ -80,11 +128,30 @@ void IO::leseDaten(const char* eingabe, int* dim, int* start, int* vmax, int* am
     positionen.push_back(out);
   }
 }
-void IO::schreibeDaten(double t, double laengen[4], double position[3])
+void IO::schreibeDaten(double time, double laengen[4], double position[3])
 {
-  
-}
-void IO::init(int dimension[3], double laengen[4], double position[3])
-{
+  t.push_back(time);
 
+  r1.push_back(laengen[0]);
+  r2.push_back(laengen[1]);
+  r3.push_back(laengen[2]);
+  r4.push_back(laengen[3]);
+
+  x.push_back(position[0]);
+  x.push_back(position[1]);
+  x.push_back(position[2]);
+}
+void IO::init(int dimension[3], double laengen[4], int position[3])
+{
+  r1.push_back(laengen[0]);
+  r2.push_back(laengen[1]);
+  r3.push_back(laengen[2]);
+  r4.push_back(laengen[3]);
+
+  t.push_back(0);
+  x.push_back(position[0]);
+  y.push_back(position[1]);
+  z.push_back(position[2]);
+
+  datei2 << dimension[0] << ',' << dimension[1] << ',' << dimension[2] << '\n';
 }

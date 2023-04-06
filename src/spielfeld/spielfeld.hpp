@@ -11,7 +11,7 @@ class Spielfeld
 {
 private:
   int dimension[3];
-  int befestigungen[3][4];
+  int befestigungen[4][3];
   Kamera kamera;
 
 public:
@@ -19,8 +19,10 @@ public:
   ~Spielfeld();
 
   void schritt(double t);
-  void bewegeKamera(double position[3]);
+  void bewegeKamera(int position[4]);
   double* getLaengen();
+  double* getPos();
+  bool done();
 };
 
 #endif

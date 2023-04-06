@@ -11,11 +11,11 @@ Spielfeld::Spielfeld(int dim[3], int position[3], int amax, int vmax)
   befestigungen[0][0] = 0;
   befestigungen[0][1] = 0;
   befestigungen[0][2] = dimension[2];
-  befestigungen[1][0] = 0;
-  befestigungen[1][1] = dimension[1];
+  befestigungen[1][0] = dimension[0];
+  befestigungen[1][1] = 0;
   befestigungen[1][2] = dimension[2];
-  befestigungen[2][0] = dimension[0];
-  befestigungen[2][1] = 0;
+  befestigungen[2][0] = 0;
+  befestigungen[2][1] = dimension[1];
   befestigungen[2][2] = dimension[2];
   befestigungen[3][0] = dimension[0];
   befestigungen[3][1] = dimension[1];
@@ -29,7 +29,7 @@ void Spielfeld::schritt(double t)
 {
   kamera.schritt(t);
 }
-void Spielfeld::bewegeKamera(double position[3])
+void Spielfeld::bewegeKamera(int position[4])
 {
   kamera.setZiel(position);
 }
@@ -45,4 +45,12 @@ double* Spielfeld::getLaengen()
   }
 
   return laengen;
+}
+double* Spielfeld::getPos()
+{
+  return kamera.getPos();
+}
+bool Spielfeld::done()
+{
+  return kamera.done();
 }
